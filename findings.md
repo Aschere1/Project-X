@@ -11,6 +11,8 @@
 - LifeOS 干净源码副本已通过 `flutter analyze --no-pub`（无问题）与 `flutter test --no-pub`（27/27）。
 - Project X 干净公开副本通过 `PUBLIC_REVIEW_TESTS_PASSED suites=21 assertions=783`，默认启动日志为 `APOCALYPSE_START_READY continue=false`，可视化输出为 `APOCALYPSE_E2E_CAPTURE_PASSED captures=34`。复查三联棚与主屋室内画面，背景/面板/状态均正常。
 - LifeOS 原有 `.git/info/exclude` 将三份规划文件排除在版本控制之外，本次沿用这一设置，公开 README 和已有工程证据保留准确状态。
+- LifeOS 已将当前 schema v2/迁移与工程文档提交为 `51b10e7`，本地 main 从 `acb3add` 快进并成功推送；Project X 首次源码提交为 `c13f371`。首次提交仅含已有文档的 Markdown 换行/许可证格式告警，不改写这些历史内容。
+- 两个仓库均已设为 PUBLIC，默认分支 main。GitHub 认证元数据确认设置；匿名读取两个 main/README.md 均返回 HTTP 200。匿名 REST API 因共享出口 IP 配额耗尽而受限，公开 raw 内容可正常访问。
 
 ## 2026-08-19：安全区设施基础启动
 - 用户明确将近期工作从完整切片验收切换到安全区设施；保留末日主线的静态可点击庇护所，而非恢复旧 `HomeRegion` 的角色行走模式。

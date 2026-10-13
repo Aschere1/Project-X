@@ -33,6 +33,8 @@ powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\scripts\test_project.p
 
 2026-10-13 干净公开副本验证：`PUBLIC_REVIEW_TESTS_PASSED suites=21 assertions=783`。本地包含私有素材时的历史全量基线为 1133 条断言；两个数字覆盖范围不同。
 
+同一干净副本的默认无头启动与 34 步 Godot Viewport E2E 均通过；E2E 输出 `APOCALYPSE_E2E_CAPTURE_PASSED captures=34`。个人运行存档未用作公开验证数据。
+
 ## 阅读顺序与发布范围
 
 先读根目录 `README.md`、`AGENTS.md`、`docs/APOCALYPSE_VERTICAL_SLICE.md`，再读 `task_plan.md`、`findings.md`、`progress.md` 和 `HANDOFF.md`。交接文档含历史状态，以最新章节为准。

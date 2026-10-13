@@ -4,12 +4,14 @@
 
 ### GitHub 外部内测公开发布
 
-- **Status:** in_progress
+- **Status:** complete
 - 用户授权 Project X 与 LifeOS 推送到 `Aschere1` 并公开，两个仓库统一 `main`。
 - 已确认账号与仓库权限；Project X 干净副本验证、LifeOS 回归、提交推送与可见性复核进行中。
 - 首次本地文件编辑被旧权限阻止；用户更新权限后恢复发布工作。
 - 干净公开副本回归通过：21 套件、783 断言；默认启动和 34 步隔离可视化 E2E 通过。新增公开回归入口与评审启动说明，并保留历史私有素材回归。
 - LifeOS 干净副本 analyze 无问题、27/27 tests；准备将文字捕获和 schema v2/迁移源码与文档统一推送至 main。
+- Project X 首次源码提交 `c13f371` 已推送到 `Aschere1/Project-X/main`；LifeOS 当前迁移/文档提交 `51b10e7` 已快进并推送到 `Aschere1/LifeOS/main`。两仓库均设为 PUBLIC 且默认分支 main。
+- 匿名读取两个公开 README 均返回 HTTP 200；没有提交私有素材、个人存档、本机工具与缓存。公开入口：https://github.com/Aschere1/Project-X 、https://github.com/Aschere1/LifeOS 。
 
 ## Session: 2026-08-20
 

@@ -1,9 +1,11 @@
 # Project X 详细交接文档
 
-更新时间：2026-08-20（Asia/Shanghai）  
+更新时间：2026-10-13（Asia/Shanghai）  
 项目目录：`D:\Archer\Project X`  
 引擎：Godot 4.7.1 stable（GDScript，非 .NET）  
 当前默认入口：`res://scenes/startup/apocalypse_start.tscn`
+
+> 2026-10-13 公开评审：Project X 已发布到 https://github.com/Aschere1/Project-X ，LifeOS 已统一发布到 https://github.com/Aschere1/LifeOS 。两个仓库均公开，默认分支均为 main。Project X 公开版启动与验收说明见 `docs/EXTERNAL_REVIEW.md`，不依赖私有素材的主线回归为 21 套件/783 断言，干净副本 34 步可视化 E2E 通过。
 
 > 2026-08-20 增量：安全区设施基础已接入保存的主屋室内、鸡棚、三联牲畜棚热点、每日维护、自动保存与 Continue 恢复；全流程通过 34 步 Godot 可视化 E2E 和人工逐图检查。最新全量回归为 `TESTS_PASSED assertions=1133`；下一步是完整切片验收与边界清单。
 

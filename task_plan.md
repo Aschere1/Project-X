@@ -18,12 +18,13 @@
 - [x] 核对账号、远端、私有素材排除规则及待发布文件。
 - [x] 为 Project X 准备公开版启动与外部评审说明。
 - [x] 验证 Project X 的干净副本与 LifeOS 最新内容。
-- [ ] 提交并推送两个仓库的 main，将可见性设为 PUBLIC 并核对远端。
-- [ ] 记录公开链接、验证证据与本地状态。
-- **Status:** in_progress
+- [x] 提交并推送两个仓库的 main，将可见性设为 PUBLIC 并核对远端。
+- [x] 记录公开链接、验证证据与本地状态。
+- **Status:** complete
 - 首次写入 `.gitignore` 被旧工作区权限阻止，未产生部分修改；用户更新为 unrestricted 后重试。
 - 干净全量测试发现历史私有素材依赖；保留原测试并提供 `-PublicReview`，21 套件/783 断言及 34 步 E2E 通过。
 - 首次整库暂存检查报告原有 Markdown 双空格换行、第三方许可证 CRLF 和旧文件尾部空行；保留原内容，对本次新增回归入口和发布说明单独进行 diff 检查，结果通过。
+- GitHub 确认两个仓库 `visibility=PUBLIC`、默认分支为 `main`；无登录凭证请求两个公开 README 均为 HTTP 200。匿名 API 元数据接口因共享 IP 配额耗尽返回 403，改用公开 raw README 核对访问。
 
 ### Phase 0：方向纠偏与工程基线
 
