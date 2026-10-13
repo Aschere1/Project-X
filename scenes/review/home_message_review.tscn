@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://src/review/home_message_review.gd" id="1_review"]
+[ext_resource type="PackedScene" path="res://scenes/world/home_region.tscn" id="2_home"]
+
+[node name="HomeMessageReview" type="Node2D"]
+script = ExtResource("1_review")
+
+[node name="HomeRegion" parent="." instance=ExtResource("2_home")]

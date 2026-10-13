@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="PackedScene" path="res://scenes/world/home_region.tscn" id="1_home_region"]
+[ext_resource type="Script" path="res://src/review/home_tree_review.gd" id="2_review"]
+
+[node name="HomeTreeReview" type="Node2D"]
+script = ExtResource("2_review")
+
+[node name="HomeRegion" parent="." instance=ExtResource("1_home_region")]

@@ -1,0 +1,9 @@
+[gd_resource type="Resource" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://src/domain/session/game_rules.gd" id="1_rules"]
+
+[resource]
+resource_name = "DefaultGameRules"
+script = ExtResource("1_rules")
+starting_minute = 360
+maximum_stamina = 100

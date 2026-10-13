@@ -1,0 +1,44 @@
+# Godot generated data
+.godot/
+
+# Exported builds
+builds/
+exports/
+
+# Local editor and operating system files
+.vscode/
+.idea/
+*.tmp
+*.bak
+Thumbs.db
+Desktop.ini
+
+# Runtime saves and local test output
+user_data/
+test_output/
+
+# Local credentials and export secrets
+export_credentials.cfg
+*.keystore
+*.jks
+
+# User-owned or otherwise non-redistributable local art overrides
+assets/private/
+
+# Local project materials and migration archives
+project_materials/
+archives/
+
+# Local publication profiles, tool binaries, captures and agent attachments
+tools/
+tmp/
+tmp_*.log
+tmp_*.err
+.codex-remote-attachments/
+.agents/
+.codex/
+.env
+.env.*
+!.env.example
+*.p12
+*.pfx

@@ -1,0 +1,11 @@
+[gd_resource type="Resource" load_steps=2 format=3]
+[ext_resource type="Script" path="res://src/domain/inventory/item_definition.gd" id="1_item"]
+[resource]
+resource_name = "Egg"
+script = ExtResource("1_item")
+item_id = &"egg"
+display_name = "鸡蛋"
+description = "每天细心照料母鸡获得的动物性食材。"
+maximum_stack_size = 99
+is_cookable = true
+ingredient_source = &"animal"

@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="FarmSoilVisualSet" format=3 uid="uid://c1scfk7ow50x3"]
+
+[ext_resource type="Script" uid="uid://c8n1afhxnv36g" path="res://src/world/farm_soil_visual_set.gd" id="1_soil_visual_set"]
+[ext_resource type="Texture2D" uid="uid://cmpn80mld2r4s" path="res://assets/private/super_retro_world_farming/Tilesets/SuperRetroWorld_Farming_Tileset.png" id="2_super_retro_tileset"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dry_tilled"]
+atlas = ExtResource("2_super_retro_tileset")
+region = Rect2(176, 960, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_untouched"]
+atlas = ExtResource("2_super_retro_tileset")
+region = Rect2(560, 448, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wet_tilled"]
+atlas = ExtResource("2_super_retro_tileset")
+region = Rect2(176, 960, 16, 16)
+
+[resource]
+resource_name = "SuperRetroFarmSoilVisualSet"
+script = ExtResource("1_soil_visual_set")
+untouched_texture = SubResource("AtlasTexture_untouched")
+dry_tilled_texture = SubResource("AtlasTexture_dry_tilled")
+wet_tilled_texture = SubResource("AtlasTexture_wet_tilled")

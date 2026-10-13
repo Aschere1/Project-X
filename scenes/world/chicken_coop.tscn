@@ -1,0 +1,27 @@
+[gd_scene format=3 uid="uid://pjf0c2q7uw0j"]
+
+[ext_resource type="Script" uid="uid://crnbftsrcn8t1" path="res://src/world/chicken_coop.gd" id="1_coop"]
+[ext_resource type="Resource" path="res://content/animals/starter_chicken.tres" id="2_chicken"]
+[ext_resource type="Texture2D" uid="uid://b72avguit5gfq" path="res://assets/third_party/kenney_tiny_town/tile_0063.png" id="3_roof"]
+[ext_resource type="Texture2D" uid="uid://cyjmu58kvllw5" path="res://assets/third_party/kenney_tiny_town/tile_0072.png" id="4_wall"]
+[ext_resource type="Texture2D" uid="uid://1oh1abekexf4" path="res://assets/third_party/kenney_tiny_town/tile_0085.png" id="5_door"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_coop"]
+size = Vector2(14, 14)
+
+[node name="ChickenCoop" type="StaticBody2D" unique_id=1534299144]
+script = ExtResource("1_coop")
+chicken = ExtResource("2_chicken")
+
+[node name="Wall" type="Sprite2D" parent="." unique_id=1428571981]
+texture = ExtResource("4_wall")
+
+[node name="Door" type="Sprite2D" parent="." unique_id=534644003]
+texture = ExtResource("5_door")
+
+[node name="Roof" type="Sprite2D" parent="." unique_id=1054843040]
+position = Vector2(0, -16)
+texture = ExtResource("3_roof")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=308875350]
+shape = SubResource("RectangleShape2D_coop")

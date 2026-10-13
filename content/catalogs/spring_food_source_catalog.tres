@@ -1,0 +1,102 @@
+[gd_resource type="Resource" script_class="FoodSourceCatalog" format=3 uid="uid://byy6asyxvgwdr"]
+
+[ext_resource type="Script" uid="uid://byaw1rxcllk4g" path="res://src/domain/food_sources/food_source_catalog.gd" id="1_catalog"]
+[ext_resource type="Script" uid="uid://38a177r1f86g" path="res://src/domain/food_sources/food_source_reward.gd" id="2_reward"]
+
+[sub_resource type="Resource" id="ForageSunnyOnion"]
+script = ExtResource("2_reward")
+source_kind = &"forage"
+weather_id = &"sunny"
+item_id = &"spring_onion"
+weight = 70
+
+[sub_resource type="Resource" id="ForageSunnyBerry"]
+script = ExtResource("2_reward")
+source_kind = &"forage"
+weather_id = &"sunny"
+item_id = &"wild_berry"
+quality = 2
+weight = 30
+
+[sub_resource type="Resource" id="ForageOvercastHerb"]
+script = ExtResource("2_reward")
+source_kind = &"forage"
+weather_id = &"overcast"
+item_id = &"wild_herb"
+quality = 2
+weight = 50
+
+[sub_resource type="Resource" id="ForageOvercastBerry"]
+script = ExtResource("2_reward")
+source_kind = &"forage"
+weather_id = &"overcast"
+item_id = &"wild_berry"
+quality = 2
+weight = 50
+
+[sub_resource type="Resource" id="ForageRainMushroom"]
+script = ExtResource("2_reward")
+source_kind = &"forage"
+weather_id = &"rain"
+item_id = &"rain_mushroom"
+quality = 3
+weight = 60
+
+[sub_resource type="Resource" id="ForageRainHerb"]
+script = ExtResource("2_reward")
+source_kind = &"forage"
+weather_id = &"rain"
+item_id = &"wild_herb"
+quality = 3
+weight = 40
+
+[sub_resource type="Resource" id="FishingSunnySmelt"]
+script = ExtResource("2_reward")
+source_kind = &"fishing"
+weather_id = &"sunny"
+item_id = &"pond_smelt"
+weight = 70
+
+[sub_resource type="Resource" id="FishingSunnyTrout"]
+script = ExtResource("2_reward")
+source_kind = &"fishing"
+weather_id = &"sunny"
+item_id = &"river_trout"
+quality = 2
+weight = 30
+
+[sub_resource type="Resource" id="FishingOvercastSmelt"]
+script = ExtResource("2_reward")
+source_kind = &"fishing"
+weather_id = &"overcast"
+item_id = &"pond_smelt"
+weight = 40
+
+[sub_resource type="Resource" id="FishingOvercastTrout"]
+script = ExtResource("2_reward")
+source_kind = &"fishing"
+weather_id = &"overcast"
+item_id = &"river_trout"
+quality = 2
+weight = 60
+
+[sub_resource type="Resource" id="FishingRainTrout"]
+script = ExtResource("2_reward")
+source_kind = &"fishing"
+weather_id = &"rain"
+item_id = &"river_trout"
+quality = 2
+weight = 50
+
+[sub_resource type="Resource" id="FishingRainEel"]
+script = ExtResource("2_reward")
+source_kind = &"fishing"
+weather_id = &"rain"
+item_id = &"rain_eel"
+quality = 3
+weight = 50
+
+[resource]
+resource_name = "SpringFoodSourceCatalog"
+script = ExtResource("1_catalog")
+rewards = Array[Resource]([SubResource("ForageSunnyOnion"), SubResource("ForageSunnyBerry"), SubResource("ForageOvercastHerb"), SubResource("ForageOvercastBerry"), SubResource("ForageRainMushroom"), SubResource("ForageRainHerb"), SubResource("FishingSunnySmelt"), SubResource("FishingSunnyTrout"), SubResource("FishingOvercastSmelt"), SubResource("FishingOvercastTrout"), SubResource("FishingRainTrout"), SubResource("FishingRainEel")])

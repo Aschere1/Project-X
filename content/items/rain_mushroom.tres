@@ -1,0 +1,12 @@
+[gd_resource type="Resource" load_steps=2 format=3]
+[ext_resource type="Script" path="res://src/domain/inventory/item_definition.gd" id="1_item"]
+[resource]
+resource_name = "RainMushroom"
+script = ExtResource("1_item")
+item_id = &"rain_mushroom"
+display_name = "雨生菇"
+description = "只有湿润雨日容易发现的珍稀蘑菇。"
+is_cookable = true
+ingredient_source = &"forage"
+default_quality = 3
+rarity_tier = 2

@@ -1,0 +1,10 @@
+[gd_resource type="Resource" load_steps=2 format=3]
+[ext_resource type="Script" path="res://src/domain/inventory/item_definition.gd" id="1_item"]
+[resource]
+resource_name = "SpringOnion"
+script = ExtResource("1_item")
+item_id = &"spring_onion"
+display_name = "野葱"
+description = "晴天里常见的清香野菜。"
+is_cookable = true
+ingredient_source = &"forage"

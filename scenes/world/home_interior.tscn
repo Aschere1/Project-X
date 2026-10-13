@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://src/world/home_interior.gd" id="1_home_interior"]
+
+[node name="HomeInterior" type="Node2D"]
+visible = false
+z_index = 1
+script = ExtResource("1_home_interior")

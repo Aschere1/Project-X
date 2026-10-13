@@ -1,0 +1,12 @@
+[gd_resource type="Resource" load_steps=2 format=3]
+[ext_resource type="Script" path="res://src/domain/inventory/item_definition.gd" id="1_item"]
+[resource]
+resource_name = "WildBerry"
+script = ExtResource("1_item")
+item_id = &"wild_berry"
+display_name = "野莓"
+description = "阴凉处生长的酸甜浆果。"
+is_cookable = true
+ingredient_source = &"forage"
+default_quality = 2
+rarity_tier = 1

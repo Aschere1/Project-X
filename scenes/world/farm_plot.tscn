@@ -1,0 +1,17 @@
+[gd_scene load_steps=5 format=3]
+
+[ext_resource type="Script" path="res://src/world/farm_plot.gd" id="1_farm_plot"]
+[ext_resource type="Resource" path="res://content/catalogs/super_retro_crop_visual_catalog.tres" id="2_crop_visuals"]
+[ext_resource type="Resource" path="res://content/catalogs/super_retro_farm_soil_visual_set.tres" id="3_soil_visuals"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_farm_plot"]
+size = Vector2(12, 12)
+
+[node name="FarmPlot" type="StaticBody2D"]
+script = ExtResource("1_farm_plot")
+blocks_movement = false
+visual_catalog = ExtResource("2_crop_visuals")
+soil_visual_set = ExtResource("3_soil_visuals")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_farm_plot")

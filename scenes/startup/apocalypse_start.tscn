@@ -1,0 +1,212 @@
+[gd_scene load_steps=8 format=3]
+
+[ext_resource type="Script" path="res://src/world/apocalypse_start.gd" id="1_start"]
+[ext_resource type="Texture2D" path="res://assets/art/apocalypse/backgrounds/apocalypse_shelter_entry_generated.png" id="2_shelter"]
+
+[sub_resource type="StyleBoxFlat" id="Style_panel"]
+content_margin_left = 14.0
+content_margin_top = 12.0
+content_margin_right = 14.0
+content_margin_bottom = 12.0
+bg_color = Color(0.0431373, 0.0627451, 0.0705882, 0.96)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.596078, 0.411765, 0.25098, 1)
+corner_radius_all = 3
+
+[sub_resource type="StyleBoxFlat" id="Style_button"]
+content_margin_left = 8.0
+content_margin_top = 4.0
+content_margin_right = 8.0
+content_margin_bottom = 4.0
+bg_color = Color(0.129412, 0.211765, 0.219608, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.341176, 0.494118, 0.490196, 1)
+corner_radius_all = 2
+
+[sub_resource type="StyleBoxFlat" id="Style_button_hover"]
+content_margin_left = 8.0
+content_margin_top = 4.0
+content_margin_right = 8.0
+content_margin_bottom = 4.0
+bg_color = Color(0.345098, 0.282353, 0.180392, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.878431, 0.796078, 0.454902, 1)
+corner_radius_all = 2
+
+[sub_resource type="StyleBoxFlat" id="Style_confirm"]
+content_margin_left = 8.0
+content_margin_top = 7.0
+content_margin_right = 8.0
+content_margin_bottom = 7.0
+bg_color = Color(0.0941176, 0.117647, 0.121569, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.768627, 0.501961, 0.290196, 1)
+corner_radius_all = 2
+
+[sub_resource type="Theme" id="Theme_start"]
+default_font_size = 8
+Button/colors/font_color = Color(0.929412, 0.964706, 0.87451, 1)
+Button/colors/font_hover_color = Color(1, 0.941176, 0.678431, 1)
+Button/font_sizes/font_size = 8
+Button/styles/normal = SubResource("Style_button")
+Button/styles/hover = SubResource("Style_button_hover")
+Button/styles/pressed = SubResource("Style_button_hover")
+Label/colors/font_color = Color(0.862745, 0.901961, 0.862745, 1)
+Label/font_sizes/font_size = 8
+VBoxContainer/constants/separation = 5
+HBoxContainer/constants/separation = 5
+
+[node name="ApocalypseStart" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_start")
+script = ExtResource("1_start")
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.0235294, 0.0313726, 0.0352941, 1)
+
+[node name="ShelterArt" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+modulate = Color(0.65, 0.72, 0.68, 0.62)
+texture = ExtResource("2_shelter")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Tint" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.0196078, 0.0352941, 0.0392157, 0.45)
+
+[node name="Margin" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 70.0
+offset_top = 22.0
+offset_right = -70.0
+offset_bottom = -22.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="PanelContainer" parent="Margin"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("Style_panel")
+
+[node name="VBox" type="VBoxContainer" parent="Margin/Panel"]
+layout_mode = 2
+
+[node name="Kicker" type="Label" parent="Margin/Panel/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.705882, 0.886275, 0.807843, 1)
+text = "PROJECT X  ·  APOCALYPSE REVIEW"
+horizontal_alignment = 1
+
+[node name="Title" type="Label" parent="Margin/Panel/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.890196, 0.698039, 1)
+theme_override_font_sizes/font_size = 16
+text = "庇护所日志"
+horizontal_alignment = 1
+
+[node name="Subtitle" type="Label" parent="Margin/Panel/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.670588, 0.803922, 0.705882, 1)
+text = "第 1 日之后，所有决定都会留下痕迹。"
+horizontal_alignment = 1
+
+[node name="Divider" type="HSeparator" parent="Margin/Panel/VBox"]
+layout_mode = 2
+
+[node name="Status" type="Label" parent="Margin/Panel/VBox"]
+layout_mode = 2
+custom_minimum_size = Vector2(0, 28)
+theme_override_colors/font_color = Color(0.858824, 0.827451, 0.67451, 1)
+text = "正在检查自动存档……"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="Buttons" type="HBoxContainer" parent="Margin/Panel/VBox"]
+layout_mode = 2
+
+[node name="ContinueButton" type="Button" parent="Margin/Panel/VBox/Buttons"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 8
+text = "继续游戏"
+
+[node name="NewGameButton" type="Button" parent="Margin/Panel/VBox/Buttons"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 8
+text = "开始新游戏"
+
+[node name="NewGameConfirmation" type="PanelContainer" parent="Margin/Panel/VBox"]
+layout_mode = 2
+visible = false
+theme_override_styles/panel = SubResource("Style_confirm")
+
+[node name="VBox" type="VBoxContainer" parent="Margin/Panel/VBox/NewGameConfirmation"]
+layout_mode = 2
+
+[node name="Message" type="Label" parent="Margin/Panel/VBox/NewGameConfirmation/VBox"]
+layout_mode = 2
+text = "开始新游戏会覆盖当前自动存档。"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="Buttons" type="HBoxContainer" parent="Margin/Panel/VBox/NewGameConfirmation/VBox"]
+layout_mode = 2
+
+[node name="Confirm" type="Button" parent="Margin/Panel/VBox/NewGameConfirmation/VBox/Buttons"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 8
+text = "确认新游戏"
+
+[node name="Cancel" type="Button" parent="Margin/Panel/VBox/NewGameConfirmation/VBox/Buttons"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 8
+text = "取消"
+
+[node name="Footer" type="Label" parent="Margin/Panel/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.509804, 0.619608, 0.592157, 1)
+text = "Enter 确认  ·  Esc 返回  ·  自动存档槽位 auto_1"
+horizontal_alignment = 1

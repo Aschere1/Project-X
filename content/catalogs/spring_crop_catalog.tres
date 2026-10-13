@@ -1,0 +1,14 @@
+[gd_resource type="Resource" load_steps=8 format=3]
+
+[ext_resource type="Script" path="res://src/domain/farming/crop_catalog.gd" id="1_catalog"]
+[ext_resource type="Resource" path="res://content/crops/turnip_crop.tres" id="2_turnip"]
+[ext_resource type="Resource" path="res://content/crops/potato_crop.tres" id="3_potato"]
+[ext_resource type="Resource" path="res://content/crops/cabbage_crop.tres" id="4_cabbage"]
+[ext_resource type="Resource" path="res://content/crops/carrot_crop.tres" id="5_carrot"]
+[ext_resource type="Resource" path="res://content/crops/basil_crop.tres" id="6_basil"]
+[ext_resource type="Resource" path="res://content/crops/strawberry_crop.tres" id="7_strawberry"]
+
+[resource]
+resource_name = "SpringCropCatalog"
+script = ExtResource("1_catalog")
+crops = [ExtResource("2_turnip"), ExtResource("3_potato"), ExtResource("4_cabbage"), ExtResource("5_carrot"), ExtResource("6_basil"), ExtResource("7_strawberry")]

@@ -1,0 +1,12 @@
+[gd_resource type="Resource" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://src/domain/inventory/item_definition.gd" id="1_item"]
+
+[resource]
+resource_name = "CarrotSeed"
+script = ExtResource("1_item")
+item_id = &"carrot_seed"
+display_name = "胡萝卜种子"
+description = "适合春季栽培的根茎种子。"
+maximum_stack_size = 99
+is_seed = true

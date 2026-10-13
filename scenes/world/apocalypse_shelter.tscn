@@ -1,0 +1,850 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://src/world/apocalypse_shelter.gd" id="1_shelter"]
+[ext_resource type="Texture2D" path="res://assets/art/apocalypse/shelter/apocalypse_shelter.png" id="2_shelter_art"]
+[ext_resource type="Texture2D" path="res://assets/art/apocalypse/ui/frames/status_bar.png" id="3_status_bar"]
+[ext_resource type="Texture2D" path="res://assets/art/apocalypse/ui/status/hunger.png" id="4_status_hunger"]
+[ext_resource type="Texture2D" path="res://assets/art/apocalypse/ui/status/thirst.png" id="5_status_thirst"]
+[ext_resource type="Texture2D" path="res://assets/art/apocalypse/ui/status/injury.png" id="6_status_injury"]
+[ext_resource type="Texture2D" path="res://assets/art/apocalypse/ui/status/infection.png" id="7_status_infection"]
+[ext_resource type="Texture2D" path="res://assets/art/apocalypse/ui/status/noise_warning.png" id="8_status_noise_warn"]
+[ext_resource type="Texture2D" path="res://assets/art/apocalypse/ui/status/time_warning.png" id="9_status_time_warn"]
+[ext_resource type="Script" path="res://src/world/apocalypse_inventory_grid.gd" id="10_inventory_grid"]
+
+[sub_resource type="StyleBoxTexture" id="Style_status_bar_texture"]
+texture = ExtResource("3_status_bar")
+texture_margin_left = 8.0
+texture_margin_top = 4.0
+texture_margin_right = 8.0
+texture_margin_bottom = 4.0
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+
+[sub_resource type="StyleBoxFlat" id="Style_hotspot_normal"]
+bg_color = Color(0, 0, 0, 0)
+
+[sub_resource type="StyleBoxFlat" id="Style_hotspot_hover"]
+bg_color = Color(0.137255, 0.188235, 0.164706, 0.07)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.505882, 0.6, 0.52549, 0.3)
+
+[sub_resource type="StyleBoxFlat" id="Style_hotspot_pressed"]
+bg_color = Color(0.137255, 0.188235, 0.164706, 0.14)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.596078, 0.690196, 0.611765, 0.55)
+
+[sub_resource type="StyleBoxFlat" id="Style_action_hover"]
+bg_color = Color(0.278431, 0.356863, 0.329412, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.65098, 0.698039, 0.584314, 0.9)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
+[sub_resource type="StyleBoxFlat" id="Style_action_pressed"]
+bg_color = Color(0.164706, 0.235294, 0.211765, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.737255, 0.760784, 0.631373, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
+[sub_resource type="StyleBoxFlat" id="Style_feature_panel"]
+bg_color = Color(0.0470588, 0.0627451, 0.0666667, 0.96)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.619608, 0.564706, 0.388235, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[sub_resource type="StyleBoxFlat" id="Style_close_button"]
+bg_color = Color(0.227451, 0.298039, 0.282353, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.619608, 0.564706, 0.388235, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
+[node name="ApocalypseShelter" type="Node2D"]
+script = ExtResource("1_shelter")
+shelter_illustration = ExtResource("2_shelter_art")
+status_hunger = ExtResource("4_status_hunger")
+status_thirst = ExtResource("5_status_thirst")
+status_injury = ExtResource("6_status_injury")
+status_infection = ExtResource("7_status_infection")
+status_noise_warning = ExtResource("8_status_noise_warn")
+status_time_warning = ExtResource("9_status_time_warn")
+
+[node name="Canvas" type="CanvasLayer" parent="."]
+
+[node name="Background" type="Control" parent="Canvas"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Fallback" type="ColorRect" parent="Canvas/Background"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.211765, 0.258824, 0.247059, 1)
+
+[node name="ShelterIllustration" type="TextureRect" parent="Canvas/Background"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("2_shelter_art")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="MapHotspots" type="Control" parent="Canvas"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MainHouse" type="Button" parent="Canvas/MapHotspots"]
+layout_mode = 0
+offset_left = 84.0
+offset_top = 8.0
+offset_right = 214.0
+offset_bottom = 93.0
+tooltip_text = "主屋"
+focus_mode = 0
+theme_override_styles/normal = SubResource("Style_hotspot_normal")
+theme_override_styles/hover = SubResource("Style_hotspot_hover")
+theme_override_styles/pressed = SubResource("Style_hotspot_pressed")
+metadata/zone_id = "main_house"
+metadata/zone_label = "主屋"
+
+[node name="ChickenCoop" type="Button" parent="Canvas/MapHotspots"]
+layout_mode = 0
+offset_left = 62.0
+offset_top = 87.0
+offset_right = 148.0
+offset_bottom = 166.0
+tooltip_text = "鸡棚"
+focus_mode = 0
+theme_override_styles/normal = SubResource("Style_hotspot_normal")
+theme_override_styles/hover = SubResource("Style_hotspot_hover")
+theme_override_styles/pressed = SubResource("Style_hotspot_pressed")
+metadata/zone_id = "chicken_coop"
+metadata/zone_label = "鸡棚 · 日常维护"
+
+[node name="LivestockPens" type="Button" parent="Canvas/MapHotspots"]
+layout_mode = 0
+offset_left = 264.0
+offset_top = 18.0
+offset_right = 410.0
+offset_bottom = 101.0
+tooltip_text = "三联牲畜棚"
+focus_mode = 0
+theme_override_styles/normal = SubResource("Style_hotspot_normal")
+theme_override_styles/hover = SubResource("Style_hotspot_hover")
+theme_override_styles/pressed = SubResource("Style_hotspot_pressed")
+metadata/zone_id = "livestock_pens"
+metadata/zone_label = "三联牲畜棚 · 牛、羊、猪"
+
+[node name="StorageShed" type="Button" parent="Canvas/MapHotspots"]
+layout_mode = 0
+offset_left = 320.0
+offset_top = 104.0
+offset_right = 422.0
+offset_bottom = 166.0
+tooltip_text = "储物棚"
+focus_mode = 0
+theme_override_styles/normal = SubResource("Style_hotspot_normal")
+theme_override_styles/hover = SubResource("Style_hotspot_hover")
+theme_override_styles/pressed = SubResource("Style_hotspot_pressed")
+metadata/zone_id = "storage"
+metadata/zone_label = "储物棚"
+
+[node name="Workbench" type="Button" parent="Canvas/MapHotspots"]
+layout_mode = 0
+offset_left = 358.0
+offset_top = 170.0
+offset_right = 446.0
+offset_bottom = 224.0
+tooltip_text = "工作台"
+focus_mode = 0
+theme_override_styles/normal = SubResource("Style_hotspot_normal")
+theme_override_styles/hover = SubResource("Style_hotspot_hover")
+theme_override_styles/pressed = SubResource("Style_hotspot_pressed")
+metadata/zone_id = "workbench"
+metadata/zone_label = "工作台"
+
+[node name="FarmBeds" type="Button" parent="Canvas/MapHotspots"]
+layout_mode = 0
+offset_left = 244.0
+offset_top = 166.0
+offset_right = 360.0
+offset_bottom = 232.0
+tooltip_text = "菜地"
+focus_mode = 0
+theme_override_styles/normal = SubResource("Style_hotspot_normal")
+theme_override_styles/hover = SubResource("Style_hotspot_hover")
+theme_override_styles/pressed = SubResource("Style_hotspot_pressed")
+metadata/zone_id = "farm_beds"
+metadata/zone_label = "菜地"
+
+[node name="Gate" type="Button" parent="Canvas/MapHotspots"]
+layout_mode = 0
+offset_left = 190.0
+offset_top = 218.0
+offset_right = 278.0
+offset_bottom = 238.0
+tooltip_text = "大门 · 外出"
+focus_mode = 0
+theme_override_styles/normal = SubResource("Style_hotspot_normal")
+theme_override_styles/hover = SubResource("Style_hotspot_hover")
+theme_override_styles/pressed = SubResource("Style_hotspot_pressed")
+metadata/zone_id = "gate"
+metadata/zone_label = "大门 · 外出"
+
+[node name="HUD" type="Control" parent="Canvas"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="BackpackButton" type="Button" parent="Canvas/HUD"]
+layout_mode = 0
+offset_left = 406.0
+offset_top = 7.0
+offset_right = 472.0
+offset_bottom = 26.0
+mouse_filter = 0
+focus_mode = 1
+theme_override_font_sizes/font_size = 8
+theme_override_styles/normal = SubResource("Style_close_button")
+theme_override_styles/hover = SubResource("Style_action_hover")
+theme_override_styles/pressed = SubResource("Style_action_pressed")
+text = "背包 [B]"
+
+[node name="CampaignObjective" type="PanelContainer" parent="Canvas/HUD"]
+layout_mode = 0
+offset_left = 6.0
+offset_top = 6.0
+offset_right = 157.0
+offset_bottom = 56.0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("Style_status_bar_texture")
+
+[node name="Objective" type="Label" parent="Canvas/HUD/CampaignObjective"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.823529, 0.862745, 0.776471, 1)
+theme_override_font_sizes/font_size = 8
+text = "首袭目标 · 第4日清晨\n□ 电力10  □ 急救包  □ 武器\n准备 0/3 · 任意2项可守住"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="BottomStatusBar" type="PanelContainer" parent="Canvas/HUD"]
+layout_mode = 0
+offset_top = 238.0
+offset_right = 480.0
+offset_bottom = 256.0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("Style_status_bar_texture")
+
+[node name="BarInner" type="HBoxContainer" parent="Canvas/HUD/BottomStatusBar"]
+layout_mode = 2
+theme_override_constants/separation = 7
+
+[node name="HpGroup" type="HBoxContainer" parent="Canvas/HUD/BottomStatusBar/BarInner"]
+layout_mode = 2
+
+[node name="HpIcon" type="Label" parent="Canvas/HUD/BottomStatusBar/BarInner/HpGroup"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.960784, 0.352941, 0.352941, 1)
+theme_override_font_sizes/font_size = 9
+text = "❤"
+
+[node name="HpValue" type="Label" parent="Canvas/HUD/BottomStatusBar/BarInner/HpGroup"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 9
+text = "72"
+
+[node name="FatigueGroup" type="HBoxContainer" parent="Canvas/HUD/BottomStatusBar/BarInner"]
+layout_mode = 2
+
+[node name="FatigueIcon" type="Label" parent="Canvas/HUD/BottomStatusBar/BarInner/FatigueGroup"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 9
+text = "😴"
+
+[node name="FatigueValue" type="Label" parent="Canvas/HUD/BottomStatusBar/BarInner/FatigueGroup"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 9
+text = "0"
+
+[node name="HungerPngSlot" type="TextureRect" parent="Canvas/HUD/BottomStatusBar/BarInner"]
+visible = false
+custom_minimum_size = Vector2(12, 12)
+layout_mode = 2
+texture = ExtResource("4_status_hunger")
+stretch_mode = 5
+
+[node name="HungerLabel" type="Label" parent="Canvas/HUD/BottomStatusBar/BarInner"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 9
+text = "🍗"
+
+[node name="HungerValue" type="Label" parent="Canvas/HUD/BottomStatusBar/BarInner"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 9
+text = "45"
+
+[node name="ThirstPngSlot" type="TextureRect" parent="Canvas/HUD/BottomStatusBar/BarInner"]
+visible = false
+custom_minimum_size = Vector2(12, 12)
+layout_mode = 2
+texture = ExtResource("5_status_thirst")
+stretch_mode = 5
+
+[node name="ThirstLabel" type="Label" parent="Canvas/HUD/BottomStatusBar/BarInner"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 9
+text = "💧"
+
+[node name="ThirstValue" type="Label" parent="Canvas/HUD/BottomStatusBar/BarInner"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 9
+text = "38"
+
+[node name="StaminaGroup" type="HBoxContainer" parent="Canvas/HUD/BottomStatusBar/BarInner"]
+layout_mode = 2
+
+[node name="StaminaIcon" type="Label" parent="Canvas/HUD/BottomStatusBar/BarInner/StaminaGroup"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 9
+text = "⚡"
+
+[node name="StaminaValue" type="Label" parent="Canvas/HUD/BottomStatusBar/BarInner/StaminaGroup"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 9
+text = "100"
+
+[node name="Warnings" type="HBoxContainer" parent="Canvas/HUD/BottomStatusBar/BarInner"]
+visible = false
+layout_mode = 2
+theme_override_constants/separation = 2
+
+[node name="PngInjurySlot" type="TextureRect" parent="Canvas/HUD/BottomStatusBar/BarInner/Warnings"]
+visible = false
+custom_minimum_size = Vector2(12, 12)
+layout_mode = 2
+texture = ExtResource("6_status_injury")
+stretch_mode = 5
+
+[node name="PngInfectionSlot" type="TextureRect" parent="Canvas/HUD/BottomStatusBar/BarInner/Warnings"]
+visible = false
+custom_minimum_size = Vector2(12, 12)
+layout_mode = 2
+texture = ExtResource("7_status_infection")
+stretch_mode = 5
+
+[node name="PngNoiseSlot" type="TextureRect" parent="Canvas/HUD/BottomStatusBar/BarInner/Warnings"]
+visible = false
+custom_minimum_size = Vector2(12, 12)
+layout_mode = 2
+texture = ExtResource("8_status_noise_warn")
+stretch_mode = 5
+
+[node name="PngTimeSlot" type="TextureRect" parent="Canvas/HUD/BottomStatusBar/BarInner/Warnings"]
+visible = false
+custom_minimum_size = Vector2(12, 12)
+layout_mode = 2
+texture = ExtResource("9_status_time_warn")
+stretch_mode = 5
+
+[node name="StressWarn" type="Label" parent="Canvas/HUD/BottomStatusBar/BarInner/Warnings"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 8
+text = "压"
+
+[node name="InjuryWarn" type="Label" parent="Canvas/HUD/BottomStatusBar/BarInner/Warnings"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 8
+text = "伤"
+
+[node name="InfectionWarn" type="Label" parent="Canvas/HUD/BottomStatusBar/BarInner/Warnings"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 8
+text = "染"
+
+[node name="NoiseWarn" type="Label" parent="Canvas/HUD/BottomStatusBar/BarInner/Warnings"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 8
+text = "噪"
+
+[node name="TimeWarn" type="Label" parent="Canvas/HUD/BottomStatusBar/BarInner/Warnings"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 8
+text = "时"
+
+[node name="HotspotLabel" type="Label" parent="Canvas"]
+visible = false
+layout_mode = 0
+offset_left = 160.0
+offset_top = 8.0
+offset_right = 320.0
+offset_bottom = 26.0
+mouse_filter = 2
+theme_override_colors/font_color = Color(0.792157, 0.843137, 0.756863, 0.92)
+theme_override_colors/font_outline_color = Color(0.0392157, 0.054902, 0.0509804, 1)
+theme_override_constants/outline_size = 2
+theme_override_font_sizes/font_size = 9
+text = "主屋"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="FeatureModal" type="Control" parent="Canvas"]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 0
+
+[node name="Backdrop" type="ColorRect" parent="Canvas/FeatureModal"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 0.56)
+
+[node name="Panel" type="PanelContainer" parent="Canvas/FeatureModal"]
+layout_mode = 0
+offset_left = 90.0
+offset_top = 45.0
+offset_right = 390.0
+offset_bottom = 240.0
+theme_override_styles/panel = SubResource("Style_feature_panel")
+
+[node name="VBox" type="VBoxContainer" parent="Canvas/FeatureModal/Panel"]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="Title" type="Label" parent="Canvas/FeatureModal/Panel/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.905882, 0.592157, 1)
+theme_override_font_sizes/font_size = 10
+text = "储物棚"
+horizontal_alignment = 1
+
+[node name="Description" type="Label" parent="Canvas/FeatureModal/Panel/VBox"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+theme_override_font_sizes/font_size = 8
+text = "功能入口已建立，真实操作将在对应领域模块接入后替换。"
+autowrap_mode = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="FeatureAction" type="Button" parent="Canvas/FeatureModal/Panel/VBox"]
+visible = false
+custom_minimum_size = Vector2(0, 18)
+layout_mode = 2
+focus_mode = 1
+theme_override_font_sizes/font_size = 8
+theme_override_styles/normal = SubResource("Style_close_button")
+theme_override_styles/hover = SubResource("Style_action_hover")
+theme_override_styles/pressed = SubResource("Style_action_pressed")
+text = "执行操作"
+
+[node name="FeatureSecondaryAction" type="Button" parent="Canvas/FeatureModal/Panel/VBox"]
+visible = false
+custom_minimum_size = Vector2(0, 18)
+layout_mode = 2
+focus_mode = 1
+theme_override_font_sizes/font_size = 8
+theme_override_styles/normal = SubResource("Style_close_button")
+theme_override_styles/hover = SubResource("Style_action_hover")
+theme_override_styles/pressed = SubResource("Style_action_pressed")
+text = "执行次要操作"
+
+[node name="FeatureTertiaryAction" type="Button" parent="Canvas/FeatureModal/Panel/VBox"]
+visible = false
+custom_minimum_size = Vector2(0, 18)
+layout_mode = 2
+focus_mode = 1
+theme_override_font_sizes/font_size = 8
+theme_override_styles/normal = SubResource("Style_close_button")
+theme_override_styles/hover = SubResource("Style_action_hover")
+theme_override_styles/pressed = SubResource("Style_action_pressed")
+text = "休息到次日"
+
+[node name="FeatureQuaternaryAction" type="Button" parent="Canvas/FeatureModal/Panel/VBox"]
+visible = false
+custom_minimum_size = Vector2(0, 18)
+layout_mode = 2
+focus_mode = 1
+theme_override_font_sizes/font_size = 8
+theme_override_styles/normal = SubResource("Style_close_button")
+theme_override_styles/hover = SubResource("Style_action_hover")
+theme_override_styles/pressed = SubResource("Style_action_pressed")
+text = "进入主屋室内"
+
+[node name="CloseButton" type="Button" parent="Canvas/FeatureModal/Panel/VBox"]
+custom_minimum_size = Vector2(0, 18)
+layout_mode = 2
+focus_mode = 1
+theme_override_font_sizes/font_size = 8
+theme_override_styles/normal = SubResource("Style_close_button")
+theme_override_styles/hover = SubResource("Style_action_hover")
+theme_override_styles/pressed = SubResource("Style_action_pressed")
+text = "返回家园"
+
+[node name="StorageModal" type="Control" parent="Canvas"]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 0
+
+[node name="Backdrop" type="ColorRect" parent="Canvas/StorageModal"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 0.64)
+
+[node name="Panel" type="PanelContainer" parent="Canvas/StorageModal"]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 10.0
+offset_right = 464.0
+offset_bottom = 260.0
+theme_override_styles/panel = SubResource("Style_feature_panel")
+
+[node name="VBox" type="VBoxContainer" parent="Canvas/StorageModal/Panel"]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="Title" type="Label" parent="Canvas/StorageModal/Panel/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.905882, 0.592157, 1)
+theme_override_font_sizes/font_size = 13
+text = "储物棚 · 背包与家园仓储"
+horizontal_alignment = 1
+
+[node name="Hint" type="Label" parent="Canvas/StorageModal/Panel/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.682353, 0.745098, 0.686275, 1)
+theme_override_font_sizes/font_size = 8
+text = "标准格库存：每堆只占一格，普通用品最多叠加 16。"
+horizontal_alignment = 1
+
+[node name="EquipmentStatus" type="Label" parent="Canvas/StorageModal/Panel/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.792157, 0.843137, 0.756863, 1)
+theme_override_font_sizes/font_size = 8
+text = "主武器：空手 · 近战伤害 2"
+horizontal_alignment = 1
+
+[node name="Columns" type="HBoxContainer" parent="Canvas/StorageModal/Panel/VBox"]
+custom_minimum_size = Vector2(0, 132)
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="BackpackPanel" type="PanelContainer" parent="Canvas/StorageModal/Panel/VBox/Columns"]
+custom_minimum_size = Vector2(217, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("Style_feature_panel")
+
+[node name="VBox" type="VBoxContainer" parent="Canvas/StorageModal/Panel/VBox/Columns/BackpackPanel"]
+layout_mode = 2
+theme_override_constants/separation = 2
+
+[node name="Title" type="Label" parent="Canvas/StorageModal/Panel/VBox/Columns/BackpackPanel/VBox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "外出背包 · 点击存入"
+horizontal_alignment = 1
+
+[node name="Weight" type="Label" parent="Canvas/StorageModal/Panel/VBox/Columns/BackpackPanel/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.858824, 0.827451, 0.67451, 1)
+theme_override_font_sizes/font_size = 8
+text = "负重 0/20"
+horizontal_alignment = 1
+
+[node name="Items" type="Control" parent="Canvas/StorageModal/Panel/VBox/Columns/BackpackPanel/VBox"]
+custom_minimum_size = Vector2(108, 72)
+layout_mode = 2
+size_flags_horizontal = 4
+mouse_filter = 0
+script = ExtResource("10_inventory_grid")
+
+[node name="HomeStoragePanel" type="PanelContainer" parent="Canvas/StorageModal/Panel/VBox/Columns"]
+custom_minimum_size = Vector2(217, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("Style_feature_panel")
+
+[node name="VBox" type="VBoxContainer" parent="Canvas/StorageModal/Panel/VBox/Columns/HomeStoragePanel"]
+layout_mode = 2
+theme_override_constants/separation = 2
+
+[node name="Title" type="Label" parent="Canvas/StorageModal/Panel/VBox/Columns/HomeStoragePanel/VBox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "家园仓储 · 点击取回"
+horizontal_alignment = 1
+
+[node name="Weight" type="Label" parent="Canvas/StorageModal/Panel/VBox/Columns/HomeStoragePanel/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.858824, 0.827451, 0.67451, 1)
+theme_override_font_sizes/font_size = 8
+text = "已用格 0/48 · 不计负重"
+horizontal_alignment = 1
+
+[node name="Items" type="Control" parent="Canvas/StorageModal/Panel/VBox/Columns/HomeStoragePanel/VBox"]
+custom_minimum_size = Vector2(144, 108)
+layout_mode = 2
+size_flags_horizontal = 4
+mouse_filter = 0
+script = ExtResource("10_inventory_grid")
+
+[node name="TransferStatus" type="Label" parent="Canvas/StorageModal/Panel/VBox"]
+custom_minimum_size = Vector2(0, 16)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.682353, 0.745098, 0.686275, 1)
+theme_override_font_sizes/font_size = 8
+text = "点击任一物品，将它转移到另一侧并自动保存。"
+horizontal_alignment = 1
+
+[node name="CloseButton" type="Button" parent="Canvas/StorageModal/Panel/VBox"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+focus_mode = 0
+theme_override_font_sizes/font_size = 9
+theme_override_styles/normal = SubResource("Style_close_button")
+theme_override_styles/hover = SubResource("Style_action_hover")
+theme_override_styles/pressed = SubResource("Style_action_pressed")
+text = "返回家园"
+
+[node name="SystemMenu" type="Control" parent="Canvas"]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 0
+
+[node name="Backdrop" type="ColorRect" parent="Canvas/SystemMenu"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 0.58)
+
+[node name="Panel" type="PanelContainer" parent="Canvas/SystemMenu"]
+layout_mode = 0
+offset_left = 150.0
+offset_top = 62.0
+offset_right = 330.0
+offset_bottom = 208.0
+theme_override_styles/panel = SubResource("Style_feature_panel")
+
+[node name="VBox" type="VBoxContainer" parent="Canvas/SystemMenu/Panel"]
+layout_mode = 2
+theme_override_constants/separation = 5
+
+[node name="Title" type="Label" parent="Canvas/SystemMenu/Panel/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.858824, 0.827451, 0.67451, 1)
+theme_override_font_sizes/font_size = 10
+text = "系统菜单"
+horizontal_alignment = 1
+
+[node name="Status" type="Label" parent="Canvas/SystemMenu/Panel/VBox"]
+custom_minimum_size = Vector2(0, 24)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.682353, 0.745098, 0.686275, 1)
+theme_override_font_sizes/font_size = 8
+text = "系统菜单已打开"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ContinueButton" type="Button" parent="Canvas/SystemMenu/Panel/VBox"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+focus_mode = 1
+theme_override_font_sizes/font_size = 8
+theme_override_styles/normal = SubResource("Style_close_button")
+theme_override_styles/hover = SubResource("Style_action_hover")
+theme_override_styles/pressed = SubResource("Style_action_pressed")
+text = "继续游戏"
+
+[node name="BackpackButton" type="Button" parent="Canvas/SystemMenu/Panel/VBox"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+focus_mode = 1
+theme_override_font_sizes/font_size = 8
+theme_override_styles/normal = SubResource("Style_close_button")
+theme_override_styles/hover = SubResource("Style_action_hover")
+theme_override_styles/pressed = SubResource("Style_action_pressed")
+text = "打开背包"
+
+[node name="SaveButton" type="Button" parent="Canvas/SystemMenu/Panel/VBox"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+focus_mode = 1
+theme_override_font_sizes/font_size = 8
+theme_override_styles/normal = SubResource("Style_close_button")
+theme_override_styles/hover = SubResource("Style_action_hover")
+theme_override_styles/pressed = SubResource("Style_action_pressed")
+text = "保存游戏 [S]"
+
+[node name="CampaignEventModal" type="Control" parent="Canvas"]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 0
+
+[node name="Backdrop" type="ColorRect" parent="Canvas/CampaignEventModal"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.0117647, 0.0196078, 0.0196078, 0.76)
+
+[node name="Panel" type="PanelContainer" parent="Canvas/CampaignEventModal"]
+layout_mode = 0
+offset_left = 60.0
+offset_top = 27.0
+offset_right = 420.0
+offset_bottom = 196.0
+theme_override_styles/panel = SubResource("Style_feature_panel")
+
+[node name="VBox" type="VBoxContainer" parent="Canvas/CampaignEventModal/Panel"]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="Kicker" type="Label" parent="Canvas/CampaignEventModal/Panel/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.682353, 0.745098, 0.686275, 1)
+theme_override_font_sizes/font_size = 8
+text = "第 5 日 · 待处理事件 · 选择前公开全部代价"
+horizontal_alignment = 1
+
+[node name="Title" type="Label" parent="Canvas/CampaignEventModal/Panel/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.905882, 0.592157, 1)
+theme_override_font_sizes/font_size = 11
+text = "断续的无线电信号"
+horizontal_alignment = 1
+
+[node name="Description" type="Label" parent="Canvas/CampaignEventModal/Panel/VBox"]
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.827451, 0.862745, 0.8, 1)
+theme_override_font_sizes/font_size = 8
+text = "第 5 日清晨，主屋旧收音机反复收到一段县城东侧的警戒广播。必须先确认风险来源，才能继续休息。"
+autowrap_mode = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PowerChoice" type="Button" parent="Canvas/CampaignEventModal/Panel/VBox"]
+custom_minimum_size = Vector2(0, 28)
+layout_mode = 2
+focus_mode = 1
+theme_override_font_sizes/font_size = 8
+theme_override_styles/normal = SubResource("Style_close_button")
+theme_override_styles/hover = SubResource("Style_action_hover")
+theme_override_styles/pressed = SubResource("Style_action_pressed")
+text = "短时供电监听 · 电力 -5；不增加疲劳或压力。"
+
+[node name="RooftopChoice" type="Button" parent="Canvas/CampaignEventModal/Panel/VBox"]
+custom_minimum_size = Vector2(0, 28)
+layout_mode = 2
+focus_mode = 1
+theme_override_font_sizes/font_size = 8
+theme_override_styles/normal = SubResource("Style_close_button")
+theme_override_styles/hover = SubResource("Style_action_hover")
+theme_override_styles/pressed = SubResource("Style_action_pressed")
+text = "登上屋顶观察 · 不耗电；疲劳 +1，压力 +1。"
+
+[node name="Result" type="Label" parent="Canvas/CampaignEventModal/Panel/VBox"]
+visible = false
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.705882, 0.886275, 0.807843, 1)
+theme_override_font_sizes/font_size = 8
+text = "事件处理结果"
+autowrap_mode = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CloseButton" type="Button" parent="Canvas/CampaignEventModal/Panel/VBox"]
+visible = false
+custom_minimum_size = Vector2(0, 18)
+layout_mode = 2
+focus_mode = 1
+theme_override_font_sizes/font_size = 8
+theme_override_styles/normal = SubResource("Style_close_button")
+theme_override_styles/hover = SubResource("Style_action_hover")
+theme_override_styles/pressed = SubResource("Style_action_pressed")
+text = "确认并返回家园"

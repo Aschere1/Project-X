@@ -1,0 +1,11 @@
+[gd_resource type="Resource" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://src/domain/inventory/item_definition.gd" id="1_item"]
+
+[resource]
+resource_name = "SpringGardenSoup"
+script = ExtResource("1_item")
+item_id = &"spring_garden_soup"
+display_name = "春野浓汤"
+description = "芜菁、胡萝卜与罗勒慢煮而成的春季招牌料理。"
+maximum_stack_size = 99

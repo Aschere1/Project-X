@@ -1,0 +1,599 @@
+[gd_scene load_steps=33 format=3]
+
+[ext_resource type="Script" path="res://src/world/movement_playground.gd" id="1_world"]
+[ext_resource type="PackedScene" path="res://scenes/player/player.tscn" id="2_player"]
+[ext_resource type="PackedScene" path="res://scenes/world/grid_interactable.tscn" id="3_interactable"]
+[ext_resource type="PackedScene" path="res://scenes/world/interaction_indicator.tscn" id="4_indicator"]
+[ext_resource type="Script" path="res://src/world/game_clock_controller.gd" id="5_clock"]
+[ext_resource type="Resource" path="res://content/rules/default_game_rules.tres" id="6_rules"]
+[ext_resource type="Script" path="res://src/adapters/persistence/save_coordinator.gd" id="7_save"]
+[ext_resource type="PackedScene" path="res://scenes/world/farm_plot.tscn" id="8_farm_plot"]
+[ext_resource type="Script" path="res://src/world/inventory_controller.gd" id="9_inventory"]
+[ext_resource type="Resource" path="res://content/catalogs/starter_item_catalog.tres" id="10_catalog"]
+[ext_resource type="PackedScene" path="res://scenes/world/home_interior.tscn" id="11_home_interior"]
+[ext_resource type="Script" path="res://src/world/cooking_controller.gd" id="12_cooking"]
+[ext_resource type="PackedScene" path="res://scenes/world/forage_spot.tscn" id="13_forage"]
+[ext_resource type="PackedScene" path="res://scenes/world/fishing_spot.tscn" id="14_fishing"]
+[ext_resource type="Resource" path="res://content/catalogs/spring_food_source_catalog.tres" id="15_food_sources"]
+[ext_resource type="PackedScene" path="res://scenes/world/chicken_coop.tscn" id="16_chicken_coop"]
+[ext_resource type="Texture2D" path="res://assets/third_party/kenney_tiny_town/tile_0057.png" id="17_counter"]
+[ext_resource type="Texture2D" path="res://assets/third_party/kenney_tiny_town/tile_0083.png" id="18_sign"]
+[ext_resource type="Texture2D" path="res://assets/third_party/kenney_tiny_town/tile_0085.png" id="19_door"]
+[ext_resource type="Texture2D" path="res://assets/third_party/kenney_tiny_town/tile_0029.png" id="20_mushrooms"]
+[ext_resource type="Texture2D" path="res://assets/third_party/kenney_tiny_town/tile_0005.png" id="21_shrub"]
+[ext_resource type="Texture2D" path="res://assets/third_party/kenney_tiny_town/tile_0104.png" id="22_well"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_spring_house"]
+size = Vector2(202, 96)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_spring_barn"]
+size = Vector2(244, 116)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_spring_coop"]
+size = Vector2(154, 100)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_spring_lower_house"]
+size = Vector2(180, 104)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_spring_pond"]
+size = Vector2(68, 62)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_spring_tree"]
+size = Vector2(20, 30)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_spring_left_water"]
+size = Vector2(68, 270)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_spring_bottom_left_water"]
+size = Vector2(240, 64)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_spring_bottom_right_water"]
+size = Vector2(736, 64)
+
+[node name="MovementPlayground" type="Node2D"]
+script = ExtResource("1_world")
+
+[node name="SpringFarmBackdrop" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(0, 44)
+centered = false
+
+[node name="SpringFarmCollision" type="StaticBody2D" parent="."]
+collision_layer = 0
+
+[node name="HouseCollision" type="CollisionShape2D" parent="SpringFarmCollision"]
+position = Vector2(172, 116)
+shape = SubResource("RectangleShape2D_spring_house")
+
+[node name="BarnCollision" type="CollisionShape2D" parent="SpringFarmCollision"]
+position = Vector2(505, 123)
+shape = SubResource("RectangleShape2D_spring_barn")
+
+[node name="CoopCollision" type="CollisionShape2D" parent="SpringFarmCollision"]
+position = Vector2(746, 126)
+shape = SubResource("RectangleShape2D_spring_coop")
+
+[node name="LowerHouseCollision" type="CollisionShape2D" parent="SpringFarmCollision"]
+position = Vector2(160, 516)
+shape = SubResource("RectangleShape2D_spring_lower_house")
+
+[node name="PondCollision" type="CollisionShape2D" parent="SpringFarmCollision"]
+position = Vector2(233, 369)
+shape = SubResource("RectangleShape2D_spring_pond")
+
+[node name="TreeCollision" type="CollisionShape2D" parent="SpringFarmCollision"]
+position = Vector2(124, 408)
+shape = SubResource("RectangleShape2D_spring_tree")
+
+[node name="LeftWaterCollision" type="CollisionShape2D" parent="SpringFarmCollision"]
+position = Vector2(34, 549)
+shape = SubResource("RectangleShape2D_spring_left_water")
+
+[node name="BottomLeftWaterCollision" type="CollisionShape2D" parent="SpringFarmCollision"]
+position = Vector2(120, 717)
+shape = SubResource("RectangleShape2D_spring_bottom_left_water")
+
+[node name="BottomRightWaterCollision" type="CollisionShape2D" parent="SpringFarmCollision"]
+position = Vector2(656, 717)
+shape = SubResource("RectangleShape2D_spring_bottom_right_water")
+
+[node name="Player" parent="." instance=ExtResource("2_player")]
+position = Vector2(248, 164)
+
+[node name="HomeInterior" parent="." instance=ExtResource("11_home_interior")]
+
+[node name="CookingCounter" parent="." instance=ExtResource("3_interactable")]
+interaction_id = &"cooking_counter"
+display_name = "旧料理柜台"
+interaction_description = "摆好厨具后，可以自由组合食材进行料理。"
+grid_cell = Vector2i(15, 7)
+fill_color = Color(0.847059, 0.552941, 0.282353, 1)
+visual_texture = ExtResource("17_counter")
+
+[node name="LetterBox" parent="." instance=ExtResource("3_interactable")]
+interaction_id = &"letter_box"
+display_name = "祖父的旧信箱"
+interaction_description = "里面放着一封褪色的欢迎信。"
+grid_cell = Vector2i(7, 9)
+fill_color = Color(0.380392, 0.537255, 0.760784, 1)
+visual_texture = ExtResource("18_sign")
+
+[node name="HomeEntrance" parent="." instance=ExtResource("3_interactable")]
+interaction_id = &"home_entrance"
+display_name = "祖父的住宅门"
+interaction_description = "推门进入住宅。"
+grid_cell = Vector2i(9, 7)
+fill_color = Color(0.478431, 0.286275, 0.184314, 1)
+visual_texture = ExtResource("19_door")
+
+[node name="Bed" parent="." instance=ExtResource("3_interactable")]
+interaction_id = &"bed"
+display_name = "祖父的旧床铺"
+interaction_description = "盖好被子，休息到第二天清晨。"
+grid_cell = Vector2i(15, 7)
+area_id = &"home_interior"
+fill_color = Color(0.607843, 0.384314, 0.454902, 1)
+z_index = 2
+
+[node name="HomeExit" parent="." instance=ExtResource("3_interactable")]
+interaction_id = &"home_exit"
+display_name = "住宅门口"
+interaction_description = "离开住宅，回到家园。"
+grid_cell = Vector2i(14, 9)
+area_id = &"home_interior"
+fill_color = Color(0.478431, 0.286275, 0.184314, 1)
+visual_texture = ExtResource("19_door")
+z_index = 2
+
+[node name="FieldPlot" parent="." instance=ExtResource("8_farm_plot")]
+interaction_id = &"field_plot"
+display_name = "空农田"
+interaction_description = "土壤松软，之后可以在这里种下第一批作物。"
+grid_cell = Vector2i(19, 5)
+fill_color = Color(0.505882, 0.321569, 0.176471, 1)
+
+[node name="ForageMeadow" parent="." instance=ExtResource("13_forage")]
+interaction_id = &"forage_meadow"
+display_name = "草地采集点"
+interaction_description = "每天会出现一份受天气影响的野外食材。"
+grid_cell = Vector2i(22, 9)
+source_catalog = ExtResource("15_food_sources")
+visual_texture = ExtResource("20_mushrooms")
+
+[node name="ForageHedge" parent="." instance=ExtResource("13_forage")]
+interaction_id = &"forage_hedge"
+display_name = "树篱采集点"
+interaction_description = "树篱间藏着另一份每日野外食材。"
+grid_cell = Vector2i(25, 11)
+source_catalog = ExtResource("15_food_sources")
+visual_texture = ExtResource("21_shrub")
+
+[node name="FishingPond" parent="." instance=ExtResource("14_fishing")]
+interaction_id = &"fishing_pond"
+display_name = "旧池塘钓点"
+interaction_description = "按 E 抛竿；每天最多带走三条鱼。"
+grid_cell = Vector2i(24, 3)
+source_catalog = ExtResource("15_food_sources")
+visual_texture = ExtResource("22_well")
+
+[node name="StarterChickenCoop" parent="." instance=ExtResource("16_chicken_coop")]
+interaction_id = &"starter_chicken_coop"
+display_name = "旧鸡舍"
+interaction_description = "先收蛋，再喂食，最后抚摸小麦。"
+grid_cell = Vector2i(4, 5)
+
+[node name="InteractionIndicator" parent="." instance=ExtResource("4_indicator")]
+
+[node name="GameClock" type="Node" parent="."]
+script = ExtResource("5_clock")
+rules = ExtResource("6_rules")
+
+[node name="InventoryController" type="Node" parent="."]
+script = ExtResource("9_inventory")
+item_catalog = ExtResource("10_catalog")
+starting_item_amounts = {&"turnip_seed": 4, &"potato_seed": 3, &"cabbage_seed": 3, &"carrot_seed": 3, &"basil_seed": 3, &"strawberry_seed": 3, &"wild_herb": 3, &"chicken_feed": 14}
+
+[node name="CookingController" type="Node" parent="."]
+script = ExtResource("12_cooking")
+inventory_controller_path = NodePath("../InventoryController")
+game_clock_path = NodePath("../GameClock")
+
+[node name="SaveCoordinator" type="Node" parent="."]
+script = ExtResource("7_save")
+player_path = NodePath("../Player")
+game_clock_path = NodePath("../GameClock")
+inventory_controller_path = NodePath("../InventoryController")
+world_state_path = NodePath("..")
+cooking_controller_path = NodePath("../CookingController")
+
+[node name="Interface" type="CanvasLayer" parent="."]
+
+[node name="WeatherLabel" type="Label" parent="Interface"]
+unique_name_in_owner = true
+offset_left = 150.0
+offset_top = 12.0
+offset_right = 330.0
+offset_bottom = 30.0
+theme_override_colors/font_color = Color(1, 0.929412, 0.678431, 1)
+theme_override_font_sizes/font_size = 10
+text = "晴 · 明日阴"
+horizontal_alignment = 1
+
+[node name="HelpLabel" type="Label" parent="Interface"]
+offset_left = 125.0
+offset_top = 31.0
+offset_right = 460.0
+offset_bottom = 44.0
+theme_override_colors/font_color = Color(0.890196, 0.952941, 0.839216, 1)
+theme_override_font_sizes/font_size = 7
+text = "WASD移动 · E互动 · F农田 · R种子 · I背包 · N笔记 · P暂停 · K/L存读档"
+horizontal_alignment = 1
+
+[node name="DayLabel" type="Label" parent="Interface"]
+unique_name_in_owner = true
+offset_left = 18.0
+offset_top = 12.0
+offset_right = 120.0
+offset_bottom = 28.0
+theme_override_colors/font_color = Color(1, 0.929412, 0.678431, 1)
+theme_override_font_sizes/font_size = 10
+text = "春  第1日"
+
+[node name="ClockLabel" type="Label" parent="Interface"]
+unique_name_in_owner = true
+offset_left = 364.0
+offset_top = 11.0
+offset_right = 462.0
+offset_bottom = 28.0
+theme_override_colors/font_color = Color(1, 0.929412, 0.678431, 1)
+theme_override_font_sizes/font_size = 12
+text = "06:00"
+horizontal_alignment = 2
+
+[node name="StaminaLabel" type="Label" parent="Interface"]
+unique_name_in_owner = true
+offset_left = 18.0
+offset_top = 29.0
+offset_right = 120.0
+offset_bottom = 42.0
+theme_override_colors/font_color = Color(0.890196, 0.952941, 0.839216, 1)
+theme_override_font_sizes/font_size = 8
+text = "体力 100/100"
+
+[node name="TargetHintLabel" type="Label" parent="Interface"]
+offset_left = 20.0
+offset_top = 235.0
+offset_right = 460.0
+offset_bottom = 248.0
+theme_override_colors/font_color = Color(0.901961, 0.819608, 0.537255, 1)
+theme_override_font_sizes/font_size = 8
+text = "黄色 E 框出现时可互动；未选中时按 E 不会发生任何事"
+horizontal_alignment = 1
+
+[node name="StatusLabel" type="Label" parent="Interface"]
+unique_name_in_owner = true
+offset_left = 20.0
+offset_top = 255.0
+offset_right = 460.0
+offset_bottom = 268.0
+theme_override_colors/font_color = Color(0.952941, 0.952941, 0.870588, 1)
+theme_override_font_sizes/font_size = 9
+horizontal_alignment = 1
+
+[node name="PauseOverlay" type="Control" parent="Interface"]
+unique_name_in_owner = true
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+visible = false
+
+[node name="Shade" type="ColorRect" parent="Interface/PauseOverlay"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.0470588, 0.0627451, 0.0627451, 0.65)
+
+[node name="Message" type="Label" parent="Interface/PauseOverlay"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -80.0
+offset_top = -16.0
+offset_right = 80.0
+offset_bottom = 16.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 0.929412, 0.678431, 1)
+theme_override_font_sizes/font_size = 18
+text = "已暂停\n按 P 继续"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="InventoryOverlay" type="Control" parent="Interface"]
+unique_name_in_owner = true
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+visible = false
+
+[node name="Shade" type="ColorRect" parent="Interface/InventoryOverlay"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.0470588, 0.0627451, 0.0627451, 0.75)
+
+[node name="Panel" type="ColorRect" parent="Interface/InventoryOverlay"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -105.0
+offset_top = -70.0
+offset_right = 105.0
+offset_bottom = 70.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.121569, 0.168627, 0.14902, 1)
+
+[node name="Title" type="Label" parent="Interface/InventoryOverlay/Panel"]
+layout_mode = 0
+offset_top = 10.0
+offset_right = 210.0
+offset_bottom = 27.0
+theme_override_colors/font_color = Color(1, 0.929412, 0.678431, 1)
+theme_override_font_sizes/font_size = 13
+text = "背包"
+horizontal_alignment = 1
+
+[node name="InventoryContentsLabel" type="Label" parent="Interface/InventoryOverlay/Panel"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 25.0
+offset_top = 37.0
+offset_right = 185.0
+offset_bottom = 105.0
+theme_override_colors/font_color = Color(0.890196, 0.952941, 0.839216, 1)
+theme_override_font_sizes/font_size = 10
+
+[node name="Hint" type="Label" parent="Interface/InventoryOverlay/Panel"]
+layout_mode = 0
+offset_top = 115.0
+offset_right = 210.0
+offset_bottom = 130.0
+theme_override_colors/font_color = Color(0.729412, 0.807843, 0.698039, 1)
+theme_override_font_sizes/font_size = 8
+text = "按 I 关闭背包"
+horizontal_alignment = 1
+
+[node name="SlotMenuOverlay" type="Control" parent="Interface"]
+unique_name_in_owner = true
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+visible = false
+
+[node name="Shade" type="ColorRect" parent="Interface/SlotMenuOverlay"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.0470588, 0.0627451, 0.0627451, 0.78)
+
+[node name="Panel" type="ColorRect" parent="Interface/SlotMenuOverlay"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -175.0
+offset_top = -82.0
+offset_right = 175.0
+offset_bottom = 82.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.121569, 0.168627, 0.14902, 1)
+
+[node name="SlotMenuTitle" type="Label" parent="Interface/SlotMenuOverlay/Panel"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_top = 10.0
+offset_right = 350.0
+offset_bottom = 28.0
+theme_override_colors/font_color = Color(1, 0.929412, 0.678431, 1)
+theme_override_font_sizes/font_size = 13
+horizontal_alignment = 1
+
+[node name="SlotMenuDetail" type="Label" parent="Interface/SlotMenuOverlay/Panel"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 16.0
+offset_top = 31.0
+offset_right = 334.0
+offset_bottom = 51.0
+theme_override_colors/font_color = Color(0.890196, 0.952941, 0.839216, 1)
+theme_override_font_sizes/font_size = 8
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="Slot1Button" type="Button" parent="Interface/SlotMenuOverlay/Panel"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 20.0
+offset_top = 56.0
+offset_right = 330.0
+offset_bottom = 76.0
+theme_override_font_sizes/font_size = 9
+
+[node name="Slot2Button" type="Button" parent="Interface/SlotMenuOverlay/Panel"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 20.0
+offset_top = 80.0
+offset_right = 330.0
+offset_bottom = 100.0
+theme_override_font_sizes/font_size = 9
+
+[node name="Slot3Button" type="Button" parent="Interface/SlotMenuOverlay/Panel"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 20.0
+offset_top = 104.0
+offset_right = 330.0
+offset_bottom = 124.0
+theme_override_font_sizes/font_size = 9
+
+[node name="SlotConfirmButton" type="Button" parent="Interface/SlotMenuOverlay/Panel"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 80.0
+offset_top = 132.0
+offset_right = 170.0
+offset_bottom = 154.0
+theme_override_font_sizes/font_size = 9
+text = "确认读取"
+
+[node name="SlotCancelButton" type="Button" parent="Interface/SlotMenuOverlay/Panel"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 180.0
+offset_top = 132.0
+offset_right = 270.0
+offset_bottom = 154.0
+theme_override_font_sizes/font_size = 9
+text = "取消"
+
+[node name="CookingOverlay" type="Control" parent="Interface"]
+unique_name_in_owner = true
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+visible = false
+
+[node name="Panel" type="ColorRect" parent="Interface/CookingOverlay"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -155.0
+offset_top = -92.0
+offset_right = 155.0
+offset_bottom = 92.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.12, 0.17, 0.15, 1)
+
+[node name="CookingStateLabel" type="Label" parent="Interface/CookingOverlay/Panel"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 16.0
+offset_top = 14.0
+offset_right = 294.0
+offset_bottom = 170.0
+theme_override_colors/font_color = Color(0.95, 0.95, 0.87, 1)
+theme_override_font_sizes/font_size = 10
+
+[node name="CookingNotebookOverlay" type="Control" parent="Interface"]
+unique_name_in_owner = true
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+visible = false
+
+[node name="Panel" type="ColorRect" parent="Interface/CookingNotebookOverlay"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -155.0
+offset_top = -92.0
+offset_right = 155.0
+offset_bottom = 92.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.12, 0.17, 0.15, 1)
+
+[node name="CookingNotebookStateLabel" type="Label" parent="Interface/CookingNotebookOverlay/Panel"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 16.0
+offset_top = 14.0
+offset_right = 294.0
+offset_bottom = 118.0
+theme_override_colors/font_color = Color(0.95, 0.95, 0.87, 1)
+theme_override_font_sizes/font_size = 10
+
+[node name="NotebookPreviousButton" type="Button" parent="Interface/CookingNotebookOverlay/Panel"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 16.0
+offset_top = 132.0
+offset_right = 74.0
+offset_bottom = 156.0
+theme_override_font_sizes/font_size = 9
+text = "上一条"
+
+[node name="NotebookNextButton" type="Button" parent="Interface/CookingNotebookOverlay/Panel"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 82.0
+offset_top = 132.0
+offset_right = 140.0
+offset_bottom = 156.0
+theme_override_font_sizes/font_size = 9
+text = "下一条"
+
+[node name="NotebookLoadButton" type="Button" parent="Interface/CookingNotebookOverlay/Panel"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 148.0
+offset_top = 132.0
+offset_right = 230.0
+offset_bottom = 156.0
+theme_override_font_sizes/font_size = 9
+text = "装填组合"
+
+[node name="NotebookCloseButton" type="Button" parent="Interface/CookingNotebookOverlay/Panel"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 238.0
+offset_top = 132.0
+offset_right = 294.0
+offset_bottom = 156.0
+theme_override_font_sizes/font_size = 9
+text = "关闭"

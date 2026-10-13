@@ -1,0 +1,199 @@
+[gd_scene load_steps=6 format=3]
+
+[ext_resource type="Script" path="res://src/world/apocalypse_global_overlay.gd" id="1_overlay"]
+[ext_resource type="Script" path="res://src/world/apocalypse_inventory_grid.gd" id="2_grid"]
+
+[sub_resource type="StyleBoxFlat" id="Style_panel"]
+bg_color = Color(0.0470588, 0.0627451, 0.0666667, 0.97)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.50, 0.56, 0.47, 0.92)
+corner_radius_all = 3
+
+[sub_resource type="StyleBoxFlat" id="Style_button"]
+bg_color = Color(0.227451, 0.298039, 0.282353, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.50, 0.56, 0.47, 0.92)
+corner_radius_all = 2
+
+[sub_resource type="StyleBoxFlat" id="Style_button_hover"]
+bg_color = Color(0.278431, 0.356863, 0.329412, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.65098, 0.698039, 0.584314, 0.9)
+corner_radius_all = 2
+
+[node name="ApocalypseGlobalOverlay" type="CanvasLayer"]
+layer = 20
+script = ExtResource("1_overlay")
+
+[node name="BackpackButton" type="Button" parent="."]
+offset_left = 404.0
+offset_top = 31.0
+offset_right = 472.0
+offset_bottom = 50.0
+focus_mode = 1
+theme_override_font_sizes/font_size = 8
+theme_override_styles/normal = SubResource("Style_button")
+theme_override_styles/hover = SubResource("Style_button_hover")
+text = "背包 [B]"
+
+[node name="InventoryModal" type="Control" parent="."]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 0
+
+[node name="Backdrop" type="ColorRect" parent="InventoryModal"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 0.64)
+
+[node name="Panel" type="PanelContainer" parent="InventoryModal"]
+offset_left = 92.0
+offset_top = 28.0
+offset_right = 388.0
+offset_bottom = 242.0
+theme_override_styles/panel = SubResource("Style_panel")
+
+[node name="VBox" type="VBoxContainer" parent="InventoryModal/Panel"]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="Title" type="Label" parent="InventoryModal/Panel/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.858824, 0.827451, 0.67451, 1)
+theme_override_font_sizes/font_size = 10
+text = "随身背包与装备"
+horizontal_alignment = 1
+
+[node name="Hint" type="Label" parent="InventoryModal/Panel/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.682353, 0.745098, 0.686275, 1)
+theme_override_font_sizes/font_size = 8
+text = "普通用品最多叠加 16 · 按 B 或 Esc 关闭"
+horizontal_alignment = 1
+
+[node name="EquipmentStatus" type="Label" parent="InventoryModal/Panel/VBox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 8
+text = "主武器：空手 · 近战伤害 2"
+horizontal_alignment = 1
+
+[node name="Weight" type="Label" parent="InventoryModal/Panel/VBox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 8
+text = "负重 0/20"
+horizontal_alignment = 1
+
+[node name="Items" type="Control" parent="InventoryModal/Panel/VBox"]
+custom_minimum_size = Vector2(108, 72)
+layout_mode = 2
+size_flags_horizontal = 4
+mouse_filter = 0
+script = ExtResource("2_grid")
+
+[node name="Status" type="Label" parent="InventoryModal/Panel/VBox"]
+custom_minimum_size = Vector2(0, 28)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.682353, 0.745098, 0.686275, 1)
+theme_override_font_sizes/font_size = 8
+text = "拖动整理格子；单击查看，右键操作。"
+autowrap_mode = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CloseButton" type="Button" parent="InventoryModal/Panel/VBox"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+focus_mode = 1
+theme_override_font_sizes/font_size = 8
+theme_override_styles/normal = SubResource("Style_button")
+theme_override_styles/hover = SubResource("Style_button_hover")
+text = "关闭背包"
+
+[node name="SystemMenu" type="Control" parent="."]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 0
+
+[node name="Backdrop" type="ColorRect" parent="SystemMenu"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 0.58)
+
+[node name="Panel" type="PanelContainer" parent="SystemMenu"]
+offset_left = 150.0
+offset_top = 62.0
+offset_right = 330.0
+offset_bottom = 208.0
+theme_override_styles/panel = SubResource("Style_panel")
+
+[node name="VBox" type="VBoxContainer" parent="SystemMenu/Panel"]
+layout_mode = 2
+theme_override_constants/separation = 5
+
+[node name="Title" type="Label" parent="SystemMenu/Panel/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.858824, 0.827451, 0.67451, 1)
+theme_override_font_sizes/font_size = 10
+text = "系统菜单"
+horizontal_alignment = 1
+
+[node name="Status" type="Label" parent="SystemMenu/Panel/VBox"]
+custom_minimum_size = Vector2(0, 24)
+layout_mode = 2
+theme_override_font_sizes/font_size = 8
+text = "系统菜单已打开"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ContinueButton" type="Button" parent="SystemMenu/Panel/VBox"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+theme_override_font_sizes/font_size = 8
+theme_override_styles/normal = SubResource("Style_button")
+theme_override_styles/hover = SubResource("Style_button_hover")
+text = "继续游戏"
+
+[node name="BackpackButton" type="Button" parent="SystemMenu/Panel/VBox"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+theme_override_font_sizes/font_size = 8
+theme_override_styles/normal = SubResource("Style_button")
+theme_override_styles/hover = SubResource("Style_button_hover")
+text = "打开背包 [B]"
+
+[node name="SaveButton" type="Button" parent="SystemMenu/Panel/VBox"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+theme_override_font_sizes/font_size = 8
+theme_override_styles/normal = SubResource("Style_button")
+theme_override_styles/hover = SubResource("Style_button_hover")
+text = "保存游戏 [S]"

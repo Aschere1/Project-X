@@ -1,0 +1,11 @@
+[gd_resource type="Resource" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://src/domain/inventory/item_definition.gd" id="1_item"]
+
+[resource]
+resource_name = "HerbRoastedRoots"
+script = ExtResource("1_item")
+item_id = &"herb_roasted_roots"
+display_name = "野香烤根茎"
+description = "野生香草引出根茎甜味的招牌烤制料理。"
+maximum_stack_size = 99

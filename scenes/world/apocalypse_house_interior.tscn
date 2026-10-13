@@ -1,0 +1,216 @@
+[gd_scene load_steps=10 format=3]
+
+[ext_resource type="Script" path="res://src/world/apocalypse_house_interior.gd" id="1_house"]
+[ext_resource type="Texture2D" path="res://assets/art/apocalypse/shelter/main_house_interior.png" id="2_interior_art"]
+[ext_resource type="PackedScene" path="res://scenes/world/apocalypse_global_overlay.tscn" id="3_overlay"]
+
+[sub_resource type="StyleBoxFlat" id="Style_hotspot_normal"]
+bg_color = Color(0, 0, 0, 0)
+
+[sub_resource type="StyleBoxFlat" id="Style_hotspot_hover"]
+bg_color = Color(0.167, 0.278, 0.238, 0.1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.75, 0.71, 0.48, 0.58)
+
+[sub_resource type="StyleBoxFlat" id="Style_hotspot_pressed"]
+bg_color = Color(0.167, 0.278, 0.238, 0.18)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.84, 0.78, 0.54, 0.82)
+
+[sub_resource type="StyleBoxFlat" id="Style_status"]
+content_margin_left = 6.0
+content_margin_top = 4.0
+content_margin_right = 6.0
+content_margin_bottom = 4.0
+bg_color = Color(0.035, 0.055, 0.055, 0.9)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.55, 0.54, 0.38, 0.9)
+corner_radius_all = 3
+
+[sub_resource type="StyleBoxFlat" id="Style_label"]
+content_margin_left = 5.0
+content_margin_top = 2.0
+content_margin_right = 5.0
+content_margin_bottom = 2.0
+bg_color = Color(0.035, 0.055, 0.055, 0.9)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.55, 0.54, 0.38, 0.82)
+corner_radius_all = 2
+
+[node name="ApocalypseHouseInterior" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_house")
+
+[node name="Backdrop" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.02, 0.024, 0.025, 1)
+
+[node name="InteriorIllustration" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("2_interior_art")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="MapHotspots" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Bed" type="Button" parent="MapHotspots"]
+layout_mode = 0
+offset_left = 74.0
+offset_top = 47.0
+offset_right = 148.0
+offset_bottom = 108.0
+tooltip_text = "床铺 · 休息到次日"
+focus_mode = 0
+theme_override_styles/normal = SubResource("Style_hotspot_normal")
+theme_override_styles/hover = SubResource("Style_hotspot_hover")
+theme_override_styles/pressed = SubResource("Style_hotspot_pressed")
+metadata/zone_id = "bed"
+metadata/zone_label = "床铺 · 休息到次日"
+
+[node name="IndoorWorkbench" type="Button" parent="MapHotspots"]
+layout_mode = 0
+offset_left = 310.0
+offset_top = 43.0
+offset_right = 406.0
+offset_bottom = 128.0
+tooltip_text = "屋内工作台 · 制作简易开锁工具"
+focus_mode = 0
+theme_override_styles/normal = SubResource("Style_hotspot_normal")
+theme_override_styles/hover = SubResource("Style_hotspot_hover")
+theme_override_styles/pressed = SubResource("Style_hotspot_pressed")
+metadata/zone_id = "indoor_workbench"
+metadata/zone_label = "屋内工作台 · 制作简易开锁工具"
+
+[node name="MedicalCorner" type="Button" parent="MapHotspots"]
+layout_mode = 0
+offset_left = 356.0
+offset_top = 158.0
+offset_right = 440.0
+offset_bottom = 232.0
+tooltip_text = "医疗与炉火 · 医疗处理"
+focus_mode = 0
+theme_override_styles/normal = SubResource("Style_hotspot_normal")
+theme_override_styles/hover = SubResource("Style_hotspot_hover")
+theme_override_styles/pressed = SubResource("Style_hotspot_pressed")
+metadata/zone_id = "medical_corner"
+metadata/zone_label = "医疗与炉火 · 医疗处理"
+
+[node name="EmergencyPower" type="Button" parent="MapHotspots"]
+layout_mode = 0
+offset_left = 398.0
+offset_top = 208.0
+offset_right = 454.0
+offset_bottom = 258.0
+tooltip_text = "应急电源 · 加注燃料"
+focus_mode = 0
+theme_override_styles/normal = SubResource("Style_hotspot_normal")
+theme_override_styles/hover = SubResource("Style_hotspot_hover")
+theme_override_styles/pressed = SubResource("Style_hotspot_pressed")
+metadata/zone_id = "emergency_power"
+metadata/zone_label = "应急电源 · 加注燃料"
+
+[node name="Exit" type="Button" parent="MapHotspots"]
+layout_mode = 0
+offset_left = 200.0
+offset_top = 220.0
+offset_right = 284.0
+offset_bottom = 268.0
+tooltip_text = "回到院子"
+focus_mode = 0
+theme_override_styles/normal = SubResource("Style_hotspot_normal")
+theme_override_styles/hover = SubResource("Style_hotspot_hover")
+theme_override_styles/pressed = SubResource("Style_hotspot_pressed")
+metadata/zone_id = "exit"
+metadata/zone_label = "回到院子"
+
+[node name="HUD" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="StatusPanel" type="PanelContainer" parent="HUD"]
+layout_mode = 0
+offset_left = 7.0
+offset_top = 6.0
+offset_right = 210.0
+offset_bottom = 56.0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("Style_status")
+
+[node name="VBox" type="VBoxContainer" parent="HUD/StatusPanel"]
+layout_mode = 2
+theme_override_constants/separation = 1
+
+[node name="Title" type="Label" parent="HUD/StatusPanel/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.91, 0.83, 0.58, 1)
+theme_override_font_sizes/font_size = 10
+text = "主屋 · 安全区中枢"
+
+[node name="Status" type="Label" parent="HUD/StatusPanel/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.78, 0.85, 0.78, 1)
+theme_override_font_sizes/font_size = 8
+text = "第 1 日 06:00 · 电力 0/100"
+
+[node name="Message" type="Label" parent="HUD/StatusPanel/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.72, 0.78, 0.72, 1)
+theme_override_font_sizes/font_size = 8
+text = "主屋内的设施已就绪。"
+autowrap_mode = 2
+
+[node name="HotspotLabel" type="Label" parent="HUD"]
+layout_mode = 0
+offset_left = 184.0
+offset_top = 8.0
+offset_right = 386.0
+offset_bottom = 26.0
+mouse_filter = 2
+theme_override_colors/font_color = Color(0.86, 0.84, 0.68, 1)
+theme_override_font_sizes/font_size = 8
+theme_override_styles/normal = SubResource("Style_label")
+text = "设施"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="GlobalOverlay" parent="." instance=ExtResource("3_overlay")]

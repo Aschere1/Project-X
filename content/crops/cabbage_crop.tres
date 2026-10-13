@@ -1,0 +1,13 @@
+[gd_resource type="Resource" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://src/domain/farming/crop_definition.gd" id="1_crop"]
+
+[resource]
+resource_name = "CabbageCrop"
+script = ExtResource("1_crop")
+crop_id = &"cabbage"
+display_name = "卷心菜"
+seed_item_id = &"cabbage_seed"
+harvest_item_id = &"cabbage"
+days_to_mature = 7
+harvest_amount = 1

@@ -1,0 +1,106 @@
+[gd_scene load_steps=4 format=3]
+
+[ext_resource type="PackedScene" path="res://scenes/world/farm_plot.tscn" id="1_farm_plot"]
+[ext_resource type="Resource" path="res://content/crops/turnip_crop.tres" id="2_turnip"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBox_review_panel"]
+bg_color = Color(0.0784314, 0.129412, 0.12549, 0.96)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.376471, 0.654902, 0.521569, 1)
+
+[node name="FarmSoilVisualReview" type="Node2D"]
+
+[node name="Panel" type="Panel" parent="."]
+offset_left = 24.0
+offset_top = 24.0
+offset_right = 456.0
+offset_bottom = 150.0
+theme_override_styles/panel = SubResource("StyleBox_review_panel")
+
+[node name="Title" type="Label" parent="."]
+offset_left = 40.0
+offset_top = 34.0
+offset_right = 440.0
+offset_bottom = 50.0
+theme_override_colors/font_color = Color(0.929412, 0.964706, 0.87451, 1)
+theme_override_font_sizes/font_size = 12
+text = "农田土壤视觉验收"
+
+[node name="Hint" type="Label" parent="."]
+offset_left = 40.0
+offset_top = 52.0
+offset_right = 440.0
+offset_bottom = 68.0
+theme_override_colors/font_color = Color(0.764706, 0.854902, 0.690196, 1)
+theme_override_font_sizes/font_size = 8
+text = "同一 16×16 格心：未耕 → 干耕 → 湿耕 → 作物叠层"
+
+[node name="Untouched" parent="." instance=ExtResource("1_farm_plot")]
+position = Vector2(72, 100)
+editor_preview_state = "untouched"
+
+[node name="DryTilled" parent="." instance=ExtResource("1_farm_plot")]
+position = Vector2(152, 100)
+editor_preview_state = "dry_tilled"
+
+[node name="WetTilled" parent="." instance=ExtResource("1_farm_plot")]
+position = Vector2(232, 100)
+editor_preview_state = "wet_tilled"
+
+[node name="DryCrop" parent="." instance=ExtResource("1_farm_plot")]
+position = Vector2(312, 100)
+editor_preview_state = "dry_crop"
+editor_preview_crop = ExtResource("2_turnip")
+
+[node name="WetCrop" parent="." instance=ExtResource("1_farm_plot")]
+position = Vector2(392, 100)
+editor_preview_state = "wet_crop"
+editor_preview_crop = ExtResource("2_turnip")
+
+[node name="UntouchedLabel" type="Label" parent="."]
+offset_left = 48.0
+offset_top = 124.0
+offset_right = 96.0
+offset_bottom = 140.0
+theme_override_font_sizes/font_size = 7
+text = "未耕"
+horizontal_alignment = 1
+
+[node name="DryLabel" type="Label" parent="."]
+offset_left = 128.0
+offset_top = 124.0
+offset_right = 176.0
+offset_bottom = 140.0
+theme_override_font_sizes/font_size = 7
+text = "干耕"
+horizontal_alignment = 1
+
+[node name="WetLabel" type="Label" parent="."]
+offset_left = 208.0
+offset_top = 124.0
+offset_right = 256.0
+offset_bottom = 140.0
+theme_override_font_sizes/font_size = 7
+text = "湿耕"
+horizontal_alignment = 1
+
+[node name="DryCropLabel" type="Label" parent="."]
+offset_left = 288.0
+offset_top = 124.0
+offset_right = 336.0
+offset_bottom = 140.0
+theme_override_font_sizes/font_size = 7
+text = "干土作物"
+horizontal_alignment = 1
+
+[node name="WetCropLabel" type="Label" parent="."]
+offset_left = 368.0
+offset_top = 124.0
+offset_right = 416.0
+offset_bottom = 140.0
+theme_override_font_sizes/font_size = 7
+text = "湿土作物"
+horizontal_alignment = 1

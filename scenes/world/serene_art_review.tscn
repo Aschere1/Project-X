@@ -1,0 +1,55 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Texture2D" path="res://assets/third_party/limezu_serene_village/serene_village_16x16.png" id="1_serene"]
+
+[node name="SereneArtReview" type="Node2D"]
+
+[node name="Backdrop" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(0, 0, 480, 0, 480, 270, 0, 270)
+color = Color(0.0666667, 0.117647, 0.109804, 1)
+
+[node name="SheetContact" type="Sprite2D" parent="."]
+position = Vector2(62, 135)
+texture = ExtResource("1_serene")
+scale = Vector2(0.17, 0.17)
+
+[node name="VillageBlock" type="Sprite2D" parent="."]
+position = Vector2(217, 154)
+texture = ExtResource("1_serene")
+region_enabled = true
+region_rect = Rect2(0, 432, 176, 256)
+scale = Vector2(0.58, 0.58)
+
+[node name="NatureBlock" type="Sprite2D" parent="."]
+position = Vector2(383, 142)
+texture = ExtResource("1_serene")
+region_enabled = true
+region_rect = Rect2(0, 112, 304, 208)
+scale = Vector2(0.47, 0.47)
+
+[node name="Interface" type="CanvasLayer" parent="."]
+
+[node name="TitleBand" type="ColorRect" parent="Interface"]
+offset_right = 480.0
+offset_bottom = 30.0
+color = Color(0.0941176, 0.207843, 0.196078, 0.94)
+
+[node name="Title" type="Label" parent="Interface/TitleBand"]
+offset_left = 12.0
+offset_top = 5.0
+offset_right = 468.0
+offset_bottom = 20.0
+theme_override_colors/font_color = Color(0.956863, 0.882353, 0.713726, 1)
+theme_override_font_sizes/font_size = 11
+text = "Serene Village · 16×16 美术预览"
+horizontal_alignment = 1
+
+[node name="Caption" type="Label" parent="Interface"]
+offset_left = 10.0
+offset_top = 241.0
+offset_right = 470.0
+offset_bottom = 261.0
+theme_override_colors/font_color = Color(0.831373, 0.929412, 0.8, 1)
+theme_override_font_sizes/font_size = 8
+text = "左：完整图集缩略图   中：建筑模块   右：树木、水岸与自然物件"
+horizontal_alignment = 1

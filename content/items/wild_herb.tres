@@ -1,0 +1,16 @@
+[gd_resource type="Resource" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://src/domain/inventory/item_definition.gd" id="1_item"]
+
+[resource]
+resource_name = "WildHerb"
+script = ExtResource("1_item")
+item_id = &"wild_herb"
+display_name = "野生香草"
+description = "可作为料理食材的清新野草。"
+maximum_stack_size = 99
+is_cookable = true
+is_seasoning = true
+ingredient_source = &"forage"
+default_quality = 3
+rarity_tier = 2

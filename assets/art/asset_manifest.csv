@@ -1,0 +1,7 @@
+asset_id,path,kind,source,status,notes
+home_terrain,assets/art/tilesets/home_terrain.png,tileset,project_original,phase1,16x16 three-row atlas with four water variants
+player_walk,assets/art/characters/player_walk.png,sprite_sheet,project_original,phase1,24x32 three directions four frames
+farmhouse,assets/art/buildings/farmhouse.png,sprite,project_original,phase1,home-region landmark
+chicken_coop,assets/art/buildings/chicken_coop.png,sprite,project_original,phase1,exterior only
+spring_tree,assets/art/props/tree.png,sprite,project_original,phase1,repeatable exterior prop
+home_props,assets/art/props/home_props.png,sprite_sheet,project_original,phase1,small exterior props

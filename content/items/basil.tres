@@ -1,0 +1,16 @@
+[gd_resource type="Resource" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://src/domain/inventory/item_definition.gd" id="1_item"]
+
+[resource]
+resource_name = "Basil"
+script = ExtResource("1_item")
+item_id = &"basil"
+display_name = "罗勒"
+description = "香气鲜明的料理调味草。"
+maximum_stack_size = 99
+is_cookable = true
+is_seasoning = true
+ingredient_source = &"farm"
+default_quality = 2
+rarity_tier = 1

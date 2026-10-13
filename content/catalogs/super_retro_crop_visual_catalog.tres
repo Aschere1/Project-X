@@ -1,0 +1,45 @@
+[gd_resource type="Resource" script_class="CropVisualCatalog" format=3 uid="uid://bj3ayly2b4hri"]
+
+[ext_resource type="Script" uid="uid://dhxtwh2v7rolu" path="res://src/domain/farming/crop_visual_catalog.gd" id="1_catalog"]
+[ext_resource type="Script" uid="uid://gjhmr1lbg76s" path="res://src/domain/farming/crop_visual_definition.gd" id="2_definition"]
+[ext_resource type="Texture2D" uid="uid://wi4o6qttse5u" path="res://assets/private/super_retro_world_farming/Props/Crops/Sprites/crop_05.png" id="3_turnip"]
+[ext_resource type="Texture2D" uid="uid://du8dalsx8miqo" path="res://assets/private/super_retro_world_farming/Props/Crops/Sprites/crop_06.png" id="4_potato"]
+[ext_resource type="Texture2D" uid="uid://6n45tcvltjn3" path="res://assets/private/super_retro_world_farming/Props/Crops/Sprites/crop_03.png" id="5_cabbage"]
+[ext_resource type="Texture2D" uid="uid://of885kmol5p4" path="res://assets/private/super_retro_world_farming/Props/Crops/Sprites/crop_04.png" id="6_carrot"]
+[ext_resource type="Texture2D" uid="uid://dn2jtvjgcl434" path="res://assets/private/super_retro_world_farming/Props/Crops/Sprites/crop_11.png" id="7_basil"]
+[ext_resource type="Texture2D" uid="uid://x7uiao6c0jwv" path="res://assets/private/super_retro_world_farming/Props/Crops/Sprites/crop_01.png" id="8_strawberry"]
+
+[sub_resource type="Resource" id="CropVisualDefinition_turnip"]
+script = ExtResource("2_definition")
+crop_id = &"turnip"
+texture = ExtResource("3_turnip")
+
+[sub_resource type="Resource" id="CropVisualDefinition_potato"]
+script = ExtResource("2_definition")
+crop_id = &"potato"
+texture = ExtResource("4_potato")
+
+[sub_resource type="Resource" id="CropVisualDefinition_cabbage"]
+script = ExtResource("2_definition")
+crop_id = &"cabbage"
+texture = ExtResource("5_cabbage")
+
+[sub_resource type="Resource" id="CropVisualDefinition_carrot"]
+script = ExtResource("2_definition")
+crop_id = &"carrot"
+texture = ExtResource("6_carrot")
+
+[sub_resource type="Resource" id="CropVisualDefinition_basil"]
+script = ExtResource("2_definition")
+crop_id = &"basil"
+texture = ExtResource("7_basil")
+
+[sub_resource type="Resource" id="CropVisualDefinition_strawberry"]
+script = ExtResource("2_definition")
+crop_id = &"strawberry"
+texture = ExtResource("8_strawberry")
+
+[resource]
+resource_name = "SuperRetroCropVisualCatalog"
+script = ExtResource("1_catalog")
+definitions = Array[Resource]([SubResource("CropVisualDefinition_turnip"), SubResource("CropVisualDefinition_potato"), SubResource("CropVisualDefinition_cabbage"), SubResource("CropVisualDefinition_carrot"), SubResource("CropVisualDefinition_basil"), SubResource("CropVisualDefinition_strawberry")])

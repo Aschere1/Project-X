@@ -1,0 +1,12 @@
+[gd_resource type="Resource" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://src/domain/inventory/item_definition.gd" id="1_item"]
+
+[resource]
+resource_name = "BasilSeed"
+script = ExtResource("1_item")
+item_id = &"basil_seed"
+display_name = "罗勒种子"
+description = "用于料理调味的春季香草种子。"
+maximum_stack_size = 99
+is_seed = true
